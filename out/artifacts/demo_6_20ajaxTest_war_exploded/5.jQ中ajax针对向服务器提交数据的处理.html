@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>get方式点击</button>
+<button>post方式点击</button>
+<script src="jquery-1.11.1.js"></script>
+<script>
+    $(function () {
+       $("button:eq(0)").click(function () {
+           $.ajax({
+               type:"get",
+               url:"GetPostServlet?username=呵呵&userpwd=123",
+//               dataType:"",
+//               data:"",
+               success:function (data) {
+                    console.log(data);
+               },
+               error:function (err) {
+
+               }
+           });
+       });
+       $("button").eq(1).click(function () {
+           $.ajax({
+              type:"post",
+               url:"GetPostServlet",
+//               dataType:"",
+               data:"username=呵呵哒&userpwd=456789",
+               success:function (data) {
+                   console.log(data);
+               },
+               error:function (err) {
+
+               }
+           });
+       });
+    });
+</script>
+</body>
+</html>

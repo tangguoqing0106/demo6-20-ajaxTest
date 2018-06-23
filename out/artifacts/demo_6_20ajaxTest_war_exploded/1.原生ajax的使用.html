@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">点击</button>
+<script>
+    var mbtn=document.getElementById("btn");
+    mbtn.onclick=function () {
+      //5步
+        var ajaxObj=new XMLHttpRequest();
+        ajaxObj.open("get","aa.txt");
+        ajaxObj.send();
+        ajaxObj.onreadystatechange=function () {
+          if(ajaxObj.readyState===4&&ajaxObj.status===200){
+              console.log(ajaxObj.responseText);
+          }
+        };
+    };
+</script>
+</body>
+</html>

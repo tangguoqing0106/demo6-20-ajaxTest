@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>点击渲染</button>
+<table id="tab" border="1">
+
+
+</table>
+<script src="jquery-1.11.1.js"></script>
+<script>
+    $(function () {
+       $("button").click(function () {
+           $.ajax({
+               type:"get",
+               url:"GetStarServlet",
+               dataType:"json",
+               success:function (data) {
+                   var str="";
+                   for(var i=0;i<data.length;i++){
+                       str+="<tr>"
+                       str+="<td>"+data[i].id+"</td>"
+                       str+="<td>"+data[i].name+"</td>"
+                       str+="<td><img src='"+data[i].img+"' width='200'></img></td>"
+                       str+="<td>"+data[i].description+"</td>"
+                       str+="</tr>"
+                   }
+                    $("#tab").html(str);
+
+               },
+               error:function (err) {
+                   
+               }
+           });
+       }); 
+    });
+    
+</script>
+</body>
+</html>

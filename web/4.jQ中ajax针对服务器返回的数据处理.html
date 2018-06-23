@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>点击xml</button>
+<button>点击json</button>
+<script src="jquery-1.11.1.js"></script>
+<script>
+    $(function () {
+        $("button:eq(0)").click(function () {
+            $.ajax({
+                type: "get",
+                dataType: "xml",
+                url: "AjaxServlet",
+//                data: "",
+                success: function (data) {
+                   console.log(data);
+                   var name_=data.getElementsByTagName("name")[0];
+                   var age_=data.getElementsByTagName("age")[0];
+                   var gender_=data.getElementsByTagName("gender")[0];
+                   console.log(name_.innerHTML);
+                   console.log(age_.innerHTML);
+                   console.log(gender_.innerHTML);
+                },
+                error: function (err) {
+
+                }
+            });
+        });
+        $("button:eq(1)").click(function () {
+            $.ajax({
+                type:"post",
+//                dataType:"json",
+                url:"AjaxServlet",
+                success:function (data) {
+                    console.log(data.name);
+                    console.log(data.age);
+                    console.log(data.gender);
+                },
+                error:function (err) {
+
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

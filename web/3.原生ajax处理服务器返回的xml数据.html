@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="xml_">点击获得xml数据</button>
+<button id="json_">点击获得json数据</button>
+<script>
+    var btn_xml=document.getElementById("xml_");
+    btn_xml.onclick=function () {
+      var ajax_xml=new XMLHttpRequest();
+      ajax_xml.open("get","XmlServlet");
+      ajax_xml.send();
+      ajax_xml.onreadystatechange=function () {
+        if(ajax_xml.readyState===4&&ajax_xml.status===200){
+            //如果接收的是xml数据,那么后台发送数据时必须声明mime类型,即application/xml
+            //然后前端通过xhr对象.responseXML接收,接收到的是一个dom对象
+            console.log(ajax_xml.responseXML);
+            var obj=ajax_xml.responseXML;
+            var name_=obj.getElementsByTagName("name")[0];
+            var age_=obj.getElementsByTagName("age")[0];
+            var gender_=obj.getElementsByTagName("gender")[0];
+            console.log(name_.innerHTML);//获取标签的内部内容
+            console.log(age_.innerHTML);
+            console.log(gender_.innerHTML);
+        }
+      };
+    };
+    var btn_json=document.getElementById("json_");
+    btn_json.onclick=function () {
+        var ajax_json=new XMLHttpRequest();
+        ajax_json.open("post","XmlServlet");
+        ajax_json.send();
+        ajax_json.onreadystatechange=function () {
+            if(ajax_json.readyState===4&&ajax_json.status===200){
+                console.log(ajax_json.responseText);
+                //如果接收的是json数据,那么后台可以不声明mime类型,直接text/html发送或者application/json也可以
+                var str=JSON.parse(ajax_json.responseText);
+                console.log(str.name);
+                console.log(str.age);
+                console.log(str.gender);
+            }
+        };
+    };
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="hehe">点击</button>
+<button id="haha">post点击</button>
+<script>
+    var btn=document.getElementById("hehe");
+    btn.onclick=function () {
+      var ajaxObj=new XMLHttpRequest();
+      ajaxObj.open("get","OldAjaxServlet?username=(●—●)&userpwd=123456");
+      ajaxObj.send();
+      ajaxObj.onreadystatechange=function () {
+        if(ajaxObj.readyState===4&&ajaxObj.status===200){
+            console.log(ajaxObj.responseText);
+        }
+      };
+    };
+    var btn1=document.getElementById("haha");
+    btn1.onclick=function () {
+      var ajaxObj1=new XMLHttpRequest();
+      ajaxObj1.open("post","OldAjaxServlet");
+      ajaxObj1.setRequestHeader("content-type","application/x-www-form-urlencoded");
+      ajaxObj1.send("username=大黄&userpwd=456789");
+      ajaxObj1.onreadystatechange=function () {
+        if(ajaxObj1.readyState===4&&ajaxObj1.status===200){
+            console.log(ajaxObj1.responseText);
+        }
+      };
+    };
+</script>
+</body>
+</html>
